@@ -1,0 +1,334 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   1299 Bilecik Kuruluş Kahvesi — tasarım sistemi
+   Miras + Modern: koyu zümrüt, antik altın, krem kağıt
+------------------------------------------------------------------ */
+
+@theme {
+  /* --------------------------------------------------------------------
+     T74 paleti kurumsal logodan turetilmistir: metalik gri govde ve
+     logodaki "7"nin kirmizisi, soguk acik gri zeminde.
+
+     Olculen kontrastlar (WCAG): govde metni 13.7:1, ikincil 8.9:1,
+     vurgu metni 8.8:1, koyu zemin uzerinde kirmizi 4.6:1.
+  -------------------------------------------------------------------- */
+
+  /* Yuzeyler */
+  --color-snow: #f6f7f8;
+  --color-mist: #edeff1;
+  --color-silver: #e1e4e8;
+  --color-line: #d5d9de;
+
+  /* Celik - logonun metalik govdesi */
+  --color-steel-950: #14181c;
+  --color-steel-900: #232930;
+  --color-steel-800: #2f3842;
+  --color-steel-700: #3e4954;
+  --color-steel-600: #4e5a67;
+  --color-steel-500: #64707e;
+  --color-steel-300: #a2acb7;
+  --color-steel-100: #dce1e6;
+  --color-steel-50: #eff2f5;
+
+  /* Kirmizi - logodaki "7" */
+  --color-crimson-700: #8e0c21;
+  --color-crimson-600: #a80e27;
+  --color-crimson: #c4122f;
+  --color-crimson-400: #ea8390;
+  --color-crimson-200: #f3c4cc;
+  --color-crimson-50: #fcedf0;
+
+  /* Murekkep */
+  --color-ink: #191d21;
+  --color-ink-soft: #3e464e;
+  --color-muted: #67707a;
+  --color-faint: #8a939d;
+
+  /* Urun ambalaji tonlari - marka kromundan bagimsiz */
+  --color-copper: #b4633a;
+  --color-clay: #a8443c;
+
+  /* Tipografi */
+  --font-display: 'Archivo', 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Hareket */
+  --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade: fade 0.5s ease both;
+  --animate-drawer: drawer 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-scrim: fade 0.25s ease both;
+  --animate-steam: steam 3.6s ease-in-out infinite;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes drawer {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes steam {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(0) scaleX(1);
+  }
+  30% {
+    opacity: 0.55;
+  }
+  70% {
+    opacity: 0.2;
+    transform: translateY(-16px) scaleX(1.4);
+  }
+}
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-snow);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -0.021em;
+    color: var(--color-steel-900);
+  }
+
+  ::selection {
+    background: var(--color-crimson-200);
+    color: var(--color-steel-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-crimson-600);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+
+  /* İnce, markaya uygun kaydırma çubuğu */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-silver) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-silver);
+    border-radius: 99px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c3c9cf;
+    background-clip: content-box;
+  }
+}
+
+@layer utilities {
+  /* Sayfa genişliği */
+  .shell {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Küçük büyük-harf etiketleri */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-crimson-700);
+  }
+
+  /* Kağıt dokusu — çok hafif */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.32;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  /* Vitrin kartlarının yumuşak gölgesi */
+  .lift {
+    box-shadow:
+      0 1px 2px rgba(35, 41, 48, 0.05),
+      0 8px 24px -12px rgba(35, 41, 48, 0.16);
+  }
+  .lift-lg {
+    box-shadow:
+      0 1px 2px rgba(35, 41, 48, 0.06),
+      0 24px 48px -20px rgba(35, 41, 48, 0.24);
+  }
+
+  /* Altın alt çizgi — bağlantı hover */
+  .crimson-underline {
+    background-image: linear-gradient(var(--color-crimson), var(--color-crimson));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .crimson-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  /* Yükleme iskeleti */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-mist) 25%,
+      var(--color-silver) 50%,
+      var(--color-mist) 75%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Baskı — karekod masa kartları
+   Yazdırıldığında yalnızca kart ızgarası basılır; A4'e altı kart sığar.
+------------------------------------------------------------------ */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  /* Panel kabuğunu ve ayarları gizle */
+  header,
+  aside,
+  nav,
+  .qr-controls,
+  .qr-actions {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  /* Panel yerleşiminin sol boşluğunu kaldır */
+  .lg\:pl-64,
+  .lg\:pl-\[4\.75rem\] {
+    padding-left: 0 !important;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  .qr-print-area {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6mm !important;
+  }
+
+  .qr-card-wrap {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .qr-card {
+    border: 1px dashed #bbb !important;
+    border-radius: 4mm !important;
+    height: 88mm;
+    justify-content: center;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Hareket hassasiyeti */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,17 @@
+node_modules
+dist
+dist-ssr
+.vite
+*.local
+.DS_Store
+
+# Ortam değişkenleri — örnek dosya depoda kalır
+.env
+.env.*
+!.env.example
+
+# Vercel bağlantı bilgileri (proje kimliği + OIDC belirteci)
+.vercel
+
+.vercel
+.env*
